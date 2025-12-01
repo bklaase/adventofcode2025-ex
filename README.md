@@ -1,6 +1,6 @@
 # aoc2025-ex
 
-Minimal Elixir skeleton for Advent of Code 2025.
+Minimal Elixir setup for Advent of Code 2025.
 
 Run tests:
 
@@ -12,5 +12,10 @@ Run in IEx:
 
 ```bash
 iex -S mix
-AOC2025Ex.Day01.part1(File.read!("inputs/day01.txt"))
+```
+Then:
+
+``` elixir
+input = AOC2025.Day01.parse( File.read! "inputs/day01.txt" )
+AOC2025.Day01.part1(input)
 ```

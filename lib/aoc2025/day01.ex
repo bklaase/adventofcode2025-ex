@@ -3,6 +3,7 @@ defmodule AOC2025.Day01 do
   Advent of Code 2025 - Day 1
   """
 
+  # solutions
   def part1(input) do
     input
     |> applyInstructions(50)
@@ -13,7 +14,8 @@ defmodule AOC2025.Day01 do
 
   def part2(input) do
     input
-    |> solve_part2()
+    |> applyInstructions2(value: 50)
+    |> Enum.sum_by(&(&1[:passes]))
   end
 
   def parse(data) do
@@ -42,5 +44,20 @@ defmodule AOC2025.Day01 do
   # part 2
   # objective: count number of times the dial CROSSES '0' given
   # startposition of '50'. So multiple rotations, cause multiple passings.
-  defp solve_part2(input), do: Enum.max(input)
+  # special gotcha: when starting at 0, and rotate left: don't recount!
+  def zeroPasses(start, delta) do
+    new = start + delta
+    division = div new, 100
+    cond do
+      start != 0 && new <= 0 -> (abs division) + 1
+      true -> (abs division)
+    end
+  end
+
+  def applyInstructions2(instructions, startValue) do
+    Enum.scan(instructions, startValue,
+              fn(elt, acc) -> [value: Integer.mod(elt+acc[:value],100),
+                               passes: zeroPasses(acc[:value], elt)]
+              end)
+  end
 end
