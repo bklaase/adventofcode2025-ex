@@ -1,6 +1,6 @@
-defmodule AOC2025Ex.Day01Test do
+defmodule AOC2025.Day01Test do
   use ExUnit.Case
-  alias AOC2025Ex.Day01
+  alias AOC2025.Day01
 
   @sample_input "1\n2\n3"
 
